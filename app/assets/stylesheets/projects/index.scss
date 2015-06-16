@@ -1,0 +1,66 @@
+.projects_index{
+  width: 100%;
+
+  .title{
+    float: left;
+    width: 60%;
+    text-align: left;
+    h1{text-align: left;padding: 0;}
+  }
+  .create_project{
+    text-align: right;
+    float: left;
+    width: 40%;
+  }
+}
+.container-fluid.publication_index {
+  clear: both;
+
+  padding-top: 60px;
+  margin: 0 5%;
+
+  .col-centered{
+    float: none;
+    margin: 0 auto;
+    padding: 5px 10px;
+  }
+    .row{text-align: center;}
+  .box-pub{
+    background-color: #e9f3f8;
+    border-radius: 5px;
+    width: 200px;
+    height: 240px;
+    text-align: center;
+    border: 1px solid #cfe9f7;
+    .delete-project {
+      float: right;
+    }
+    .thumb_project{
+
+      width: 100%;
+      margin-right: auto;
+      margin-left: auto;
+      padding: 10px;
+    }
+    .delete-project{
+      margin-right: 10px;
+      margin-bottom: 10px;
+    }
+
+    .name{
+      text-align: left;
+      margin-left: 10px;
+      color: #747474;
+      &:hover{text-decoration: none;}
+    }
+
+    .icon-close {
+      float: right;
+      margin-top: 5px;
+      margin-right: 10px;
+      font-size: 1.4em;
+      color: #777;
+      cursor: pointer;
+      }
+  }
+}

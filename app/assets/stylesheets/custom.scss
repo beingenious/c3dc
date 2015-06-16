@@ -1,0 +1,169 @@
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+
+/* centered columns styles */
+.row-centered {
+    text-align:center;
+}
+.col-centered {
+    display:inline-block;
+    float:none;
+    /* reset the text-align */
+    text-align:left;
+    /* inline-block space fix */
+    margin-right:-4px;
+}
+html {height: 100%}
+
+body{
+  height:100%;
+  width: 100%;
+
+  font-family: 'Lato', sans-serif;
+  font-weight: 300;
+
+  a{
+    text-decoration: none;
+    color: #6dcaf1;
+  }
+
+  h1 {
+      font-family: 'Lato', sans-serif;
+      font-weight: 300;
+      color: #747474;
+      font-size: 2.5em;
+      margin: 0px;
+      padding-bottom: 40px;
+      text-align: center;
+
+  }
+  h2 {
+      font-family: 'Lato', sans-serif;
+      font-weight: 300;
+      color: #747474;
+      font-size: 1.4em;
+  }
+
+  p{
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    color: #747474;
+    font-size: 1em;
+  }
+
+  .btn{
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    font-size: 1em;
+  }
+
+  .btn-primary
+  {
+    background-color: #6dcaf1;
+    color: #ffffff;
+    border: none;
+    text-align: center;
+    text-transform: uppercase;
+    border-radius: 5px;
+    &:hover {background-color: #009fdb;}
+  }
+
+  .btn-danger
+  {
+    border: none;
+    text-align: center;
+    text-transform: uppercase;
+    border-radius: 5px;
+  }
+
+  .btn-warning
+  {
+    color: #ffffff;
+    border: none;
+    text-align: center;
+    text-transform: uppercase;
+    border-radius: 5px;
+  }
+
+  .btn-extra
+  {
+    background-color: #22b072;
+    color: #ffffff;
+    border: none;
+    text-align: center;
+    text-transform: uppercase;
+    border-radius: 5px;
+    &:hover {
+      background-color: #35a26e;
+      color: #ffffff;
+    }
+  }
+
+  .btn.btn-light-extra
+  {
+    background-color: rgba(255,255,255, 0);
+    color: #22b072;
+    border: 1px solid #22b072;
+    text-align: center;
+    text-transform: uppercase;
+    border-radius: 5px;
+    font-size: 1em;
+    padding: 8px;
+    &:hover {
+      background-color: rgba(255,255,255, 0.1);
+      color: #22b072;
+    }
+  }
+
+  .btn-default
+  {
+    color: #00aee5;
+    border: 1px solid #00aee5;
+    text-align: center;
+    text-transform: uppercase;
+    &:hover {
+      background-color: #EDF7F7;
+      color: #00aee5;
+      border: 1px solid #00aee5;
+    }
+  }
+
+  .btn-sm
+  {
+    width: 30px;
+    height: 30px;
+  }
+
+  .alert-error {
+    background-color: #f2dede;
+    border-color: #eed3d7;
+    color: #b94a48;
+    text-align: left;
+   }
+
+  .alert-alert {
+      background-color: #f2dede;
+      border-color: #eed3d7;
+      color: #b94a48;
+      text-align: left;
+   }
+
+  .alert-success {
+      background-color: #dff0d8;
+      border-color: #d6e9c6;
+      color: #468847;
+      text-align: left;
+   }
+
+  .alert-notice {
+      background-color: #dff0d8;
+      border-color: #d6e9c6;
+      color: #468847;
+      text-align: left;
+   }
+
+   .bootbox .modal-dialog{margin-top: 60px;}
+
+}

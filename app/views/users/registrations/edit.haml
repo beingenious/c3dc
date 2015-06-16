@@ -1,0 +1,37 @@
+= stylesheet_link_tag 'general_new/bootstrapValidator.min'
+= stylesheet_link_tag "admin_new/devise/registrations/edit"
+= stylesheet_link_tag "admin_new/devise/form"
+
+= content_for :javascripts do
+  = javascript_include_tag "general_new/bootstrapValidator.min.js"
+  = javascript_include_tag "general_new/frameworkBootstrap.min.js"
+  = javascript_include_tag "general_new/bootstrapValidator_#{I18n.locale}.js"
+  = javascript_include_tag "admin_new/devise/registrations/edit.js"
+
+%h1=t('users.profile.title')
+.edit.form-container
+  = form_for resource, url: registration_path(resource_name), :html => {:method => "put",:id => "edit_user", class: "form-horizontal"} do |f|
+    .form-group
+      = devise_error_messages!
+    .form-group
+      = f.text_field :first_name, class: "form-control", :placeholder => t('users.profile.firstname'), autocomplete: "off"
+    .form-group
+      = f.text_field :last_name, class: "form-control", :placeholder => t('users.profile.lastname'), autocomplete: "off"
+    .form-group
+      = f.text_field :company, autofocus: true, class: "form-control", autocomplete: "off", :placeholder => t('users.profile.company')
+    .form-group
+      = f.country_select :country_code, {priority_countries: ["FR", "GB", "US"]}, class: 'form-control', :placeholder => t('users.profile.country')
+    .form-group
+      = f.text_field :address, class: "form-control", :placeholder => t('users.profile.adress'), autocomplete: "off"
+    .form-group
+      = f.text_field :zipcode, class: "form-control", :placeholder => t('users.profile.zip'), autocomplete: "off"
+    .form-group
+      %h2=t('users.password.title')
+    .form-group
+      = f.password_field :current_password, autocomplete: "off", class: "form-control", :placeholder => t('users.password.pwd')
+    .form-group
+      = f.password_field :password, autocomplete: "off", class: "form-control", :placeholder => t('users.password.newpwd')
+    .form-group
+      = f.password_field :password_confirmation, autocomplete: "off", class: "form-control", :placeholder => t('users.password.confirmpwd')
+    .form-group
+      %button.btn.btn-primary.btn-lg{:type => "submit"}=t('button.update')

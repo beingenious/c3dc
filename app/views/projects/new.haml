@@ -1,0 +1,23 @@
+= stylesheet_link_tag 'general/bootstrapValidator.min'
+= stylesheet_link_tag "user/form"
+
+= content_for :javascripts do
+  = javascript_include_tag "general/bootstrapValidator.min.js"
+  = javascript_include_tag "general/frameworkBootstrap.min.js"
+  = javascript_include_tag "general/bootstrapValidator_#{I18n.locale}.js"
+  = javascript_include_tag "projects/new.js"
+
+
+.newproject.form-container
+  %h1 New Project
+  %form#newproject.form-horizontal
+    .form-group
+    .form-group
+      = text_field_tag :name, '', class: "form-control", placeholder: "Name"
+    .form-group
+      = text_area_tag :description, '', class: "form-control", placeholder: :Description, rows: 10, style: "height: 60px"
+    .form-group
+      = select_tag :acquisition, options_for_select([["Random","1"], ["Linear","34"]]), prompt: "Acquisition type", class: "form-control"
+    .form-group
+      / Do NOT use name="submit" or id="submit" for the Submit button
+      %button.btn.btn-primary.btn-lg{:type => "submit"} Create

@@ -1,0 +1,336 @@
+$( document ).ready(function() {
+  init_dropzone();
+  init_project();
+  init_run();
+});
+
+function init_run() {
+  $('.run').on('click', function(){
+    console.log("click run");
+    var id = $("form.upload-zone.square").attr('id');
+    $.ajax({
+      url: "http://www.mymultimediaworld.com:8088/projects/" + id + '/run',
+      beforeSend : C3dc.before_send,
+      error:function(result) {
+          console.log("error init_run" + JSON.stringify(result));
+          $('button.run').text("There is a problem, run again");
+      },
+      success: function(result) {
+        $('button.run').attr("disabled", "disabled");
+        $('button.run').text("Processing");
+      }
+    });
+  });
+}
+
+var table_elem = $('#table-javascript');
+var data_table = [];
+function init_dropzone() {
+  var totalBytesToSend = 0;
+  var totalBytesSend = 0;
+  Dropzone.autoDiscover = false;
+  Dropzone.addRemoveLinks = false;
+  var myDropzone = new Dropzone(".upload-zone",{
+    addRemoveLinks: false,
+    previewsContainer: '',
+    uploadMultiple: false,
+    autoProcessQueue: true,
+    parallelUploads: 3,
+    sendingAsync: true,
+    url: '/',
+    previewTemplate: '',
+    // Specifing an event as an configuration option overwrites the default
+    // `addedfile` event handler.
+
+    addedfile: function(file) {
+      console.log("addedfile ");
+      $('.bottom-content').show();
+      $('#main-progress-bar').attr('aria-valuenow', 0);
+      $('.empty-table').hide();
+      var myfile = file;
+      totalBytesToSend += file.size;
+      $.ajax({
+          url: "http://www.mymultimediaworld.com:8088/pictures/",
+          type: 'POST',
+          async: false,
+          datatype: 'json',
+          data: {project: this.element.id, imagetype: 1},
+          beforeSend : C3dc.before_send,
+          error:function(result) {
+              console.log("error addedfile" + JSON.stringify(result));
+          },
+          success: success_path
+      });
+
+      function success_path(result){
+        console.log("success addedfile");
+        myfile.picture_id = result.picture_id;
+        myfile.id = result.id;
+        myfile.path = result.path;
+        var obj = {id: myfile.id,name: "picture " + myfile.picture_id, size: 0};
+        data_table.push(obj);
+
+        $('#table-javascript').bootstrapTable('prepend', obj);
+      }
+
+      this.options.url = 'http://' +file.path;
+      this.options.method = "PATCH";
+    },
+
+    // Called when a file is added to the queue
+    //Receives `file`
+    processing: function(file) {
+
+    },
+
+    sending: function(file, xhr, formData) {
+      xhr.setRequestHeader('Authorization','Bearer ' + sessionStorage.getItem('access_token'));
+    },
+    uploadprogress: function(file, progress, bytesSent) {
+      //console.log("uploadprogress  "+progress + "file id = "+file.id);
+
+      var res = file.size - Math.round(file.size * (progress/100));
+      totalBytesSend += Math.round(res);
+      var pourcent = Math.round(progress);
+      update_data(file, pourcent)
+    /*
+      var index = getIndexById(file.id);
+      if (index > 0) {
+        table_elem.bootstrapTable('updateRow', {index: index, row: {id: file.id,name: "picture " + file.picture_id, size: pourcent}});
+      }
+      */
+    },
+    totaluploadprogress: function(progress, totalBytes ) {
+
+      var bar = $('#main-progress-bar');
+      totalBytesToSend ;
+      var pourcent = Math.round((totalBytesSend/totalBytesToSend) * 100);
+      pourcent = (pourcent >= 100) ? 100 : pourcent;
+      if (pourcent > bar.attr('aria-valuenow'))
+      {
+        bar.attr('aria-valuenow', pourcent);
+        bar.css('width', pourcent+ "%");
+        bar.text(pourcent + "%");
+      }
+    },
+    queuecomplete: function() {
+      //$('.bottom-content').hide();
+      $('p.finish').text('Upload Complete');
+      totalBytesToSend = 0;
+      totalBytesSend = 0;
+    },
+    error: function(file, message, xhr) {console.log("error");},
+    success: function(file) {
+      console.log("success "+file.path);
+      this.processQueue();
+    }
+  });
+
+  function update_data(file, pourcent) {
+
+    //var data = table_elem.bootstrapTable('getData');
+    var index = 0;
+
+    var length = data_table.length;
+    for (i = 0;i < length; ++i) {
+      if (data_table[i].id == file.id)
+      {
+        data_table[i].size = pourcent;
+        index = getIndexById(file.id);
+
+        //if (index > 0 && table_elem) {
+        //  table_elem.bootstrapTable('updateRow', {index: index, row: {id: file.id,name: "picture " + file.id, size: pourcent}});
+        //}
+      }
+    };
+    $('#table-javascript').bootstrapTable('load', data_table);
+  }
+}
+
+function get_result_details(result_item) {
+  if (result_item.result_type == 0)
+    return {name: "point set (.ply)", url: "viewer/"+result_item.result_id};
+  else if (result_item.result_type == 1)
+    return {name: "mesh (.ply)", url: "viewer/"+result_item.result_id};
+  else if (result_item.result_type == 2)
+    return {name: "mp4 point cloud", url: "http://157.159.160.112:8080/player/"+result_item.result_id};
+  else if (result_item.result_type == 3)
+    return {name: "mp4 mesh", url: "http://157.159.160.112:8080/player/"+result_item.result_id};
+  else if (result_item.result_type == 4)
+    return {name: "mp4 simplified mesh", url: "http://157.159.160.112:8080/player/"+result_item.result_id};
+}
+
+
+function init_project() {
+  var id = $("form.upload-zone.square").attr('id');
+  $.ajax({
+        url: "http://www.mymultimediaworld.com:8088/projects/" + id,
+        datatype: 'json',
+        beforeSend : C3dc.before_send,
+        error:function(result) {
+            console.log("error init_project" + JSON.stringify(result));
+        },
+        success: success_init_project
+    });
+
+  function success_init_project(result){
+    console.log("success success_init_project");
+    $("h2").text("Project "+result.name);
+
+    if (result.status == 2)
+    {
+      //logs
+      var html_logs = "";
+      var length_log = result.log_set.length;
+      for (i = 0;i < length_log; ++i) {
+        html_logs += '<a href="http://'+result.log_set[i].path+'">Download log '+result.log_set[i].log_id+'</a></br>'
+      }
+      $('#collapseLog .well').append(html_logs);
+
+      //results
+      var html_results = "";
+      var length_result = result.result_set.length;
+      for (i = 0;i < length_result; ++i) {
+        var detail = get_result_details(result.result_set[i]);
+        html_results += detail.name+' ';
+        html_results += '<a href="http://'+result.result_set[i].path+'">Download</a> ';
+        html_results += '<a href="'+detail.url+'" target="_blank" >Preview</a></br>';
+      }
+      $('#collapse3dObject .well').append(html_results);
+      $('.result').show();
+    }
+    else if (result.status == 1)
+    {
+      $('button.run').attr("disabled", "disabled");
+      $('button.run').text("Processing");
+    }
+    //picture
+    var html_pictures = "";
+    var length_pict = result.picture_set.length;
+    if (length_pict <= 0)
+      $('.empty-table').show();
+    else
+      $('.empty-table').hide();
+    var data = [];
+    for (i = 0;i < length_pict; ++i) {
+      data.push({id: result.picture_set[i].id,
+                name: "picture " + result.picture_set[i].picture_id,
+                size: 100});
+    }
+
+    data_table = data;
+    $('#table-javascript').bootstrapTable({
+        data: data,
+        pagination: true,
+        pageSize: 40,
+        pageList: [50, 100, 150, 200, 300],
+        search: true,
+        minimumCountColumns: 2,
+        clickToSelect: true,
+        hideLoading: true,
+        idField: 'id',
+        rowStyle: rowStyle,
+        toolbar: "#toolbar",
+        columns: [{
+            field: 'state',
+            checkbox: true
+        }, {
+            field: 'id',
+            visible: false
+        }, {
+            field: 'name',
+            title: 'Name',
+            align: 'left',
+            valign: 'middle',
+            sortable: true,
+            width: '80%',
+        },
+        {
+            field: 'size',
+            title: 'Progress',
+            align: 'right',
+            halign: 'center',
+            valign: 'middle',
+            sortable: true,
+            width: '20%',
+            formatter: progressFormatter,
+        },
+        {
+            field: 'operate',
+            align: 'right',
+            valign: 'middle',
+            clickToSelect: false,
+            formatter: operateFormatter,
+            events: operateEvents
+        }]
+    });
+  $('#table-javascript').bootstrapTable('hideLoading');
+  $('.delete-selection').on('click', function(){
+    var selections = $('#table-javascript').bootstrapTable('getSelections');
+    var length = selections.length;
+    for (i = 0;i < length; ++i) {
+      delete_image(selections[i].id);
+    };
+  })
+  $('.projectshow').show();
+
+  }
+}
+
+function getIndexById(id) {
+
+  var row = $('.row_'+id)
+  //var index = $('#table-javascript tbody tr').index(row);
+  var index = row.data('index');
+  return index;
+}
+
+function operateFormatter(value, row, index) {
+      return [
+          '<a class="remove ml10" href="javascript:void(0)" title="Remove">',
+              '<i class="glyphicon glyphicon-trash"></i>',
+          '</a>'
+      ].join('');
+}
+
+function progressFormatter(value, row, index) {
+      return '<div class="progress">'+
+              '<div class="progress-bar" role="progressbar" aria-valuenow="'+value+'" aria-valuemin="0" aria-valuemax="100" style="width: '+value+'%;">'+
+              '<span class="sr-only">60% Complete</span></div></div>';
+}
+
+function rowStyle(row, index) {
+  return {
+          classes: "row_"+row.id
+      };
+}
+
+function delete_image(id) {
+  console.log("ask delete image "+id);
+    $.ajax({
+    url: "http://www.mymultimediaworld.com:8088/pictures/"+id,
+    type: 'DELETE',
+    datatype: 'json',
+    beforeSend : C3dc.before_send,
+    error:function(result) {
+        console.log("error delete image" + JSON.stringify(result));
+    },
+    success: success_delete
+  });
+
+  function success_delete(result){
+    console.log("success delete image");
+    $('#table-javascript').bootstrapTable('remove', {field: 'id', values: [id]})
+    data_table = $('#table-javascript').bootstrapTable('getData');
+  }
+}
+
+window.operateEvents = {
+    'click .remove': function (e, value, row, index) {
+        $(e.currentTarget).attr('disabled','disabled');
+        this.disabled = true;
+        //todo bug remove
+        delete_image(row.id);
+    }
+};
+

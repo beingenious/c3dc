@@ -1,0 +1,50 @@
+body{
+  background-image: url(image_path('login.jpg'));
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+.sessions{
+  h1 {text-align: center;}
+
+  .forget-link{
+    padding-top: 10px;
+    a{
+      color: #aaa;
+      font-size: 1em;
+      font-style: italic;
+    }
+  }
+
+  &.form-container .form-group.has-error .help-block{padding-left: 68px;}
+
+  &.form-container{
+     margin: 15% 0 0 50px;
+    width: 400px;
+  }
+
+  .no_account{
+
+    width:400px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 20px;
+    p{
+      font-size: 1em;
+
+      display: inline-block;
+      text-align: left;
+    }
+
+    .right {
+      display: inline-block;
+      padding-left: 65px;
+      a {
+        background-color: #f8f8f8;
+        &:hover {background-color: #EDF7F7;}
+      }
+    }
+  }
+}

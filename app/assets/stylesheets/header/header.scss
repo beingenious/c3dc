@@ -1,0 +1,23 @@
+.menu-header{
+  height: 50px;
+  background-color: #fff;
+  border-color: #fff;
+  border: none;
+  .logo{
+    background-image: url(image_path('logo.png'));
+    background-repeat: no-repeat;
+    background-size: auto 30px;
+    background-position: center;
+    width: 120px;
+    height: 50px;
+  }
+  .navbar-brand, .navbar-text{padding: 0;}
+  .navbar-nav.navbar-right:last-child{
+    margin-right: -5px;
+  }
+}
+
+.main_content{
+  padding-top: 80px;
+  margin: 0 25px;
+  }

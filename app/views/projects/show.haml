@@ -1,0 +1,44 @@
+= content_for :javascripts do
+  = javascript_include_tag "general/dropzone.js"
+  = javascript_include_tag "general/bootstrap-table/bootstrap-table.js"
+  = javascript_include_tag "projects/show.js"
+
+.projectshow
+  %form.upload-zone.square{id: "#{params['id']}"}
+
+    .text
+      %img.arrow{ src: image_path('fleche.png'),  alt:"upload" }
+      click or drop to upload
+  .result
+    %a{"aria-controls" => "collapseLog", "aria-expanded" => "false", "data-toggle" => "collapse", :href => "#collapseLog"}
+      Log files
+    %span -
+    %a{"aria-controls" => "collapse3dObject", "aria-expanded" => "false", "data-toggle" => "collapse", :href => "#collapse3dObject"}
+      Object 3D
+    .collaspse-zone
+      #collapseLog.collapse
+        .well
+      #collapse3dObject.collapse
+        .well
+
+  .title
+    %h2
+  .run-project
+    %button.run.btn.btn-primary.btn-lg Run the Project
+  .pictures
+
+    #toolbar.btn-group
+      %a.delete-selection{:type => "button"}
+        %i.glyphicon.glyphicon-trash
+    %table.table-striped.table-condensed#table-javascript
+    .empty-table
+      %img.cloud1{ src: image_path('nuage1.png'),  alt:"cloud" }
+      %p Your project is empty
+      %img.cloud2{ src: image_path('nuage2.png'),  alt:"cloud" }
+.bottom-content
+  %p.finish Upload in progress
+  .progress#main-progress
+    .progress-bar#main-progress-bar{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "60", :role => "progressbar", :style => "width: 0%;"}
+      0%
+
+

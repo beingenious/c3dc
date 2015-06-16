@@ -1,0 +1,173 @@
+h1{
+  padding-top: 40px;
+}
+
+ .bottom-content{
+    display: none;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 60px;
+    margin-left: -25px;
+    background-color: #fafafa;
+    p.finish{
+      padding: 5px 20px 0;
+      margin: 0;
+    }
+    .progress {
+
+      margin: 0 20px;
+      //margin-top: 20px;
+      height: 20px;
+      background-color: #fff;
+      .progress-bar{
+        background-color: #6dcaf1;
+        min-width: 0;
+      }
+    }
+  }
+
+.projectshow{
+  display: none;
+  padding-bottom: 60px;
+  .upload-zone{
+    border-radius: 0.625em;
+    transition: background 0.1s ease-in-out;
+    background-color: white;
+    cursor: pointer;
+    width: 100%;
+    height: 100px;
+    cursor: pointer;
+    margin: 0 auto;
+    border: 1px dashed #cfe9f7;
+
+  }
+  .result {
+    display: none;
+    width: 300px;
+    margin: 0 auto;
+    text-align: center;
+    padding-top: 40px;
+    a{color:#747474;}
+    .collaspse-zone{padding-top: 20px;}
+    .well{
+      border-color: #6dcaf1;
+      background-color: #FDFDFD;
+      a{color:#6dcaf1;}
+    }
+  }
+  .title{
+    float: left;
+    width: 60%;
+    text-align: left;
+    h1{text-align: left;padding: 0;}
+    padding-top: 30px;
+  }
+  .run-project{
+    padding-top: 30px;
+    text-align: right;
+    float: left;
+    width: 40%;
+  }
+
+  .square {
+      background-color: white;
+      line-height: 100px;
+      .picture {
+          width: 100%;
+          height: 90%;
+          padding: 0;
+          background: url(image_path('upload.svg'));
+          background-size: 80% 100%;
+          background-position: center center;
+          background-repeat: no-repeat;
+          //border: black 1px solid;
+      }
+      .text {
+        text-align: center;
+        vertical-align: middle;
+        font-size: 1.5em;
+        color: #6dcaf1;
+      }
+  }
+  .square:hover {
+      background-color: #E4E4E4;
+  }
+  .pictures{
+    padding-top: 20px;
+    width: 100%;
+    margin: 0 auto;
+    clear: both;
+
+    .progress {
+      margin: 0;
+      height: 10px;
+      .progress-bar{
+        background-color: #6dcaf1;
+        min-width: 0;
+      }
+    }
+
+    .table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {
+      background-color: #e9f3f8;
+       &:hover{
+        background-color: #eee;
+        }
+    }
+  .fixed-table-toolbar{
+    height: 40px;
+    line-height: 40px;
+    .bars.pull-left{
+      vertical-align: bottom;
+    }
+  }
+
+  .empty-table{
+    display: none;
+    padding-top: 50px;
+    text-align: center;
+    width: 600px;
+    margin: 0 auto;
+    p{display: inline;
+      margin: 0 100px 0 90px;}
+      .cloud2{margin-top: 50px;}
+      .cloud1{margin-top: -90px;}
+
+  }
+    table{
+      border: 1px solid #cfe9f7;
+      border-collapse:collapse;
+      padding-top: 20px;
+      .no-records-found{display: none;}
+      input[type="checkbox"]{
+        border: 1px inset #cfe9f7;
+      }
+      thead{
+        background-color: #fafafa;
+        border: 1px solid #dddddd;
+        border-radius: 5px;
+        th{
+          border:none;
+          outline:none;
+        }
+      }
+      tr{
+        td{
+          border:none;
+          outline:none;
+        }
+
+        &:hover{
+          //opacity: 0.8;
+          background-color: #ddd;
+          td a.remove{
+            opacity: 1;
+          }
+        }
+      }
+      td a.remove{
+        opacity: 0;
+      }
+    }
+  }
+}
