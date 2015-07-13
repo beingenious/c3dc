@@ -164,7 +164,7 @@ function get_result_details(result_item) {
 function init_project() {
   var id = $("form.upload-zone.square").attr('id');
   $.ajax({
-        url: "http://www.mymultimediaworld.com:8088/projects/" + id,
+        url: "http://www.mymultimediaworld.com:8088/projects/" + id + "/",
         datatype: 'json',
         beforeSend : C3dc.before_send,
         error:function(result) {

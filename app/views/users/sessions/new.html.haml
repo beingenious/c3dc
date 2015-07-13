@@ -16,9 +16,9 @@
       = hidden_field_tag :client_secret, 'dddf466940feab08d4d9d539409eaa4a4922ddb7'
       = hidden_field_tag :grant_type, 'password'
     .form-group
-      = text_field_tag :username, 'jerome.c3d', class: "form-control", placeholder: 'Login'
+      = text_field_tag :username, '', class: "form-control", placeholder: 'Login'
     .form-group
-      = password_field_tag :password, 'c3dpass',  class: "form-control", placeholder: :Password
+      = password_field_tag :password, '',  class: "form-control", placeholder: :Password
     .form-group
       / Do NOT use name="submit" or id="submit" for the Submit button
       %button.btn.btn-primary.btn-lg{:type => "submit"}=t('button.login')
