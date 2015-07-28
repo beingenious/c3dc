@@ -1,4 +1,4 @@
-class ProjectsController < ApplicationController
+class C3dweb::ProjectsController < ApplicationController
 
   def index
 

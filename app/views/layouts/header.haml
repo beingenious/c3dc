@@ -13,8 +13,8 @@
         .logo
     #myNavbar.navbar-collapse.collapse.no-transition
       %ul.nav.navbar-nav.navbar-right
-        %li
-          = link_to "My projects" , projects_path, {:class => "navbar-text"}
         -if params[:action] != 'sign_up' && params[:action] != 'sign_in'
+          %li
+            = link_to "My projects" , c3dweb_projects_path, {:class => "navbar-text"}
           %li
             = link_to 'Logout', '',class:('email_header navbar-text')

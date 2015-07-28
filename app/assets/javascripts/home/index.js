@@ -6,7 +6,7 @@ function init() {
 
   var token = sessionStorage.getItem('access_token');
   if(token)
-    window.location = "/projects/";
+    window.location = "/c3dweb/projects/";
   else
-    window.location = "/sign_in";
+    window.location = "/c3dweb/sign_in";
 }

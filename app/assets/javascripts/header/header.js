@@ -9,7 +9,7 @@ function init_header() {
   $('.email_header').on("click", function(){
     sessionStorage.removeItem('user');
     sessionStorage.clear();
-    window.location = "/";
+    window.location = "/c3dweb/";
   });
 
 }

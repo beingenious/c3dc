@@ -1,16 +1,22 @@
 Rails.application.routes.draw do
 
-  resources :projects
+  namespace :c3dweb do
 
-  get 'projects/new'
+    resources :projects
 
-  get 'projects/show/:id' => 'projects#show'
-  get 'projects/viewer/:id' => 'projects#viewer'
+    get 'projects/new'
 
-  get 'sign_in' => 'home#sign_in'
-  get 'sign_up' => 'home#sign_up'
+    get 'projects/show/:id' => 'projects#show'
+    get 'projects/viewer/:id' => 'projects#viewer'
 
-  root 'home#index'
+    get 'sign_in' => 'home#sign_in'
+    get 'sign_up' => 'home#sign_up'
+
+    root 'home#index'
+
+  end
+
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

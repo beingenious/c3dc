@@ -38,7 +38,7 @@ $(document).ready(function() {
                     sessionStorage.setItem('access_token', result.access_token);
                     sessionStorage.setItem('user', result);
 
-                    window.location = "/projects/";
+                    window.location = "/c3dweb/projects/";
                 }
             });
         });

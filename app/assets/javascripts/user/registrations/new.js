@@ -49,7 +49,7 @@ $(document).ready(function() {
                 },
                 success: function(result) {
                     console.log("success sign up" + result);
-                     window.location = "/";
+                     window.location = "/c3dweb/";
                 }
             });
         });

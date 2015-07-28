@@ -1,4 +1,4 @@
-class HomeController < ApplicationController
+class C3dweb::HomeController < ApplicationController
   def index
 
   end

@@ -35,7 +35,7 @@ $(document).ready(function() {
                     console.log("error project new" + result);
                 },
                 success: function(result) {
-                     window.location = "/projects/";
+                     window.location = "/c3dweb/projects/";
                 },
                 beforeSend : C3dc.before_send
             });
