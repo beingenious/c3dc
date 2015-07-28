@@ -20,7 +20,7 @@ function initProjects() {
     for (i = 0;i < length; ++i) {
         html_publications += '<div class="col-centered" id="'+$data[i].id+'"><div class="box-pub">';
 
-        html_publications += '<a href="/projects/'+$data[i].id+'">';
+        html_publications += '<a href="/c3dweb/projects/'+$data[i].id+'">';
         if ($data[i].picture_set && $data[i].picture_set[0])
           html_publications += '<img src="'+path_thumb+'" class="thumb_project" height="190px" width="180px" />';
           //html_publications += '<img alt="cloud" class="cloud2" src="http://'+$data[i].picture_set[0].path+'" height="190px" width="180px" />'
